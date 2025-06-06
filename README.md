@@ -1,12 +1,21 @@
-# React + Vite
+# Greener Thumb
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![image]()
 
-Currently, two official plugins are available:
+A fun tool built with React for anyone who is looking to add some more green life into your space. I am using the perenual custom built API to help me find the best plants.
+<!-- **[Profile]()** -->
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How It's Made:
 
-## Expanding the ESLint configuration
+**Tech used:** <img src="https://img.shields.io/static/v1?label=|&message=JAVASCRIPT&color=3c7f5d&style=plastic&logo=javascript"/> <img src="https://img.shields.io/static/v1?label=|&message=Node.js&color=3c7f5d&style=plastic&logo=node.js"/> <img src="https://img.shields.io/static/v1?label=|&message=express&color=3c7f5d&style=plastic&logo=express"/> <img src="https://img.shields.io/static/v1?label=|&message=Bootstrap&color=3c7f5d&style=plastic&logo=Bootstrap"/> <img src="https://img.shields.io/static/v1?label=|&message=React.js&color=3c7f5d&style=plastic&logo=React"/>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+
+## Optimizations:
+
+This application was built to help me pick out plants for my home. With more time I want to create individual components for each plant coming from the API.
+
+## Lessons Learned:
+
+This was a fun project to put together. React is an amazing tool to create responsive and interactive tools.
