@@ -1,71 +1,76 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 
-const FormSection = ({setPlants, setMessage }) => {
+const FormSection = ({ setPlants, setMessage }) => {
     const [formData, setFormData] = useState({
         edible: '',
         pets_kids: '',
         lifespan: '',
         water_schedule: '',
         sunlight: ''
-    })
+    });
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFormData({
             ...formData,
             [name]: value
-        })
-    }
+        });
+    };
 
-    const shuffleArray= (array) => { //this function takes an array and swamps values 
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
-            [array[i], array[j]] = [array[j], array[i]]; // swap elements
-        }
+    const shuffleArray = (array) => {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+        [array[i], array[j]] = [array[j], array[i]]; // swap elements
+      }
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault() //this disables the default behavier of a form submission. Since we are building with React we dont want the whole page to reload. We are managing the state.
-        const params = new URLSearchParams(Object.enteries(formData).filter(([key, value])=> value != '')).toString()
-        const apiUrl = `https://perenual.com/api/species-list?key=${import.meta.env.VITE_PERENUAL_API_KEY}&indoor=1${params}`;
+        e.preventDefault();
+        console.log(formData)
+        const params = new URLSearchParams(
+          Object.entries(formData).filter(([key, value]) => value !== '')
+      ).toString();
+        const apiUrl = `https://perenual.com/api/v2/species-list?key=${import.meta.env.VITE_PERENUAL_API_KEY}&indoor=1&${params}`;
 
-        try{
+        try {
+            console.log(params)
             const response = await fetch(apiUrl);
             const data = await response.json();
-            const validData = data.data.filter(item => 
+            const validData = data.data.filter(item =>
                 !(item.cycle.includes("Upgrade") ||
                     item.watering.includes("Upgrade") ||
                     item.sunlight.includes("Upgrade"))
             );
 
-            if (validData && validData.length > o){
+            console.log(validData)
+
+            if (validData && validData.length > 0) {
                 shuffleArray(validData)
-                setPlants(validData.slice(0,3))
-                setMessage(null)
-            }else{
-                setPlants([])
-                setMessage("No results returned, please modify your selection and try again.")
+                setPlants(validData.slice(0, 3));
+                setMessage(null);
+            } else {
+                setPlants([]);
+                console.log('no result')
+                setMessage("No results returned, please modify your selection and try again.");
             }
-
-        } catch (err){
-            console.error('Error:', error)
-            setPlants({})
-            setMessage("Internal Server Error")
+        } catch (error) {
+            console.error('Error:', error);
+            setPlants([]);
+            setMessage("Internal Server Error");
         }
-    }
+    };
 
-    return(
+    return (
         <div className="form-section">
             <h1>Greener Thumb</h1>
-            <h2>Murder Fewer House Plants!</h2>
+            <h2>Murder Fewer Houseplants...maybe</h2>
             <form id="plant-form" onSubmit={handleSubmit}>
-                {['edible', 'pets_kids', 'lifespan', 'water_schedule', 'sunlight'].map
-                ((field, index)=> (
+                {['edible', 'pets_kids', 'lifespan', 'water_schedule', 'sunlight'].map((field, index) => (
                     <div className="question" key={index}>
-                        <label htmlFor={field}>{field === 'pets_kids' ? 'PETS OR KIDS' : field.replace('_', '').toUpperCase()}</label>
+                        <label htmlFor={field}>{field === 'pets_kids' ? 'PETS OR KIDS' : field.replace('_', ' ').toUpperCase()}</label>
                         <select name={field} id={field} value={formData[field]} onChange={handleChange}>
                             <option value="">No preference</option>
-                            {/* {other options} */}
+                            {/* Other options */}
                             {field === 'edible' && <>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -86,7 +91,7 @@ const FormSection = ({setPlants, setMessage }) => {
                             {field === 'sunlight' && <>
                                 <option value="full_sun">Full sun!</option>
                                 <option value="full_shade">All shade, all the time</option>
-                                <option value="part_shade">Equal parts sun and shade (or I dunno...)</option>       
+                                <option value="part_shade">Equal parts sun and shade (or I dunno...)</option>
                             </>}
                         </select>
                     </div>
@@ -94,8 +99,7 @@ const FormSection = ({setPlants, setMessage }) => {
                 <button type="submit">Submit</button>
             </form>
         </div>
-    )
-
-}
+    );
+};
 
 export default FormSection;
