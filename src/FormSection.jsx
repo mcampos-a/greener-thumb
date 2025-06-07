@@ -37,10 +37,45 @@ const FormSection = ({setPlants, setMessage }) => {
                     item.watering.includes("Upgrade") ||
                     item.sunlight.includes("Upgrade"))
             );
+
+            if (validData && validData.length > o){
+                shuffleArray(validData)
+                setPlants(validData.slice(0,3))
+                setMessage(null)
+            }else{
+                setPlants([])
+                setMessage("No results returned, please modify your selection and try again.")
+            }
+
         } catch (err){
-            
+            console.error('Error:', error)
+            setPlants({})
+            setMessage("Internal Server Error")
         }
     }
+
+    return(
+        <div className="form-section">
+            <h1>Greener Thumb</h1>
+            <h2>Murder Fewer House Plants!</h2>
+            <form id="plant-form" onSubmit={handleSubmit}>
+                {['edible', 'pets_kids', 'lifespan', 'water_schedule', 'sunlight'].map
+                ((field, index)=> (
+                    <div className="question" key={index}>
+                        <label htmlFor={field}>{field === 'pets_kids' ? 'PETS OR KIDS' : field.replace('_', '').toUpperCase()}</label>
+                        <select name={field} id={field} value={formData[field]} onChange={handleChange}>
+                            <option value="">No preference</option>
+                            {}
+                            {field === 'edible' && <>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </>}
+                        </select>
+                    </div>
+                ))}
+            </form>
+        </div>
+    )
 
 }
 
