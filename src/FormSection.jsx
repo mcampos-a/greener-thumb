@@ -37,10 +37,14 @@ const FormSection = ({ setPlants, setMessage }) => {
             const response = await fetch(apiUrl);
             const data = await response.json();
             const validData = data.data.filter(item =>
-                !(item.cycle.includes("Upgrade") ||
-                    item.watering.includes("Upgrade") ||
-                    item.sunlight.includes("Upgrade"))
-            );
+                !(
+                    item.cycle?.includes("Upgrade") ||
+                    item.watering?.includes("Upgrade") ||
+                    (Array.isArray(item.sunlight)
+                        ? item.sunlight.some(s => s.includes("Upgrade"))
+                        : item.sunlight?.includes("Upgrade"))
+                )
+);
 
             console.log(validData)
 
