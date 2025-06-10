@@ -30,7 +30,7 @@ const FormSection = ({ setPlants, setMessage }) => {
         const params = new URLSearchParams(
           Object.entries(formData).filter(([key, value]) => value !== '')
       ).toString();
-        const apiUrl = `https://perenual.com/api/v2/species-list?key=${import.meta.env.VITE_PERENUAL_API_KEY}&indoor=1&${params}`;
+        const apiUrl = `https://perenual.com/api/species-list?key=${import.meta.env.VITE_PERENUAL_API_KEY}&indoor=1&${params}`;
 
         try {
             console.log(params)
