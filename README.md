@@ -18,4 +18,4 @@ This application was built to help me pick out plants for my home. With more tim
 
 ## Lessons Learned:
 
-This was a fun project to put together. React is an amazing tool to create responsive and interactive tools.
+This was a fun project to put together. React is an amazing tool to create responsive and interactive tools. Eventually I would like to update this app to the v2 version of the API.
