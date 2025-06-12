@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const FormSection = ({ setPlants, setMessage }) => {
+const FormSection = ({ setPlants, setMessage }) => { //component 
     const [formData, setFormData] = useState({
         edible: '',
         pets_kids: '',
